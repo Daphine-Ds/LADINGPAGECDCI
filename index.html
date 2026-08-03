@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desmisficando o CI CD</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="glow-bg"></div>
+
+    <header>
+        <div class="status-badge">
+            <span class="pulse-dot"></span> Pipeline Ativo
+        </div>
+        <h1>Integração e Entrega Contínua</h1>
+        <p>Aprenda como alterações no seu código se transformam automaticamente em site no ar via GitHub Actions.</p>
+    </header>
+
+    <main class="grid-container">
+        <!-- CI Card -->
+        <div class="card ci">
+            <div class="card-icon">⚡</div>
+            <h2>1. Continuous Integration (CI)</h2>
+            <p>Sempre que você faz um <span class="code-pill">git push</span>, o GitHub dispara um processo
+                automatizado. Ele valida as alterações, checa a sintaxe e garante que a sua ramificação principal (<span
+                    class="code-pill">main</span>) continue estável e sem erros.</p>
+        </div>
+
+        <!-- CD Card -->
+        <div class="card cd">
+            <div class="card-icon">🚀</div>
+            <h2>2. Continuous Deployment (CD)</h2>
+            <p>Assim que a validação (CI) é concluída com sucesso, o robô assume a publicação! O código
+                compilado/estático é implantado instantaneamente no servidor do **GitHub Pages** sem nenhuma intervenção
+                manual.</p>
+        </div>
+
+        <!-- GitHub Actions Card -->
+        <div class="card actions">
+            <div class="card-icon">🤖</div>
+            <h2>3. GitHub Actions</h2>
+            <p>É o motor por trás da mágica. A configuração fica dentro do arquivo <span
+                    class="code-pill">.github/workflows/deploy.yml</span>. É lá que definimos os gatilhos, o ambiente e
+                os passos que o robô deve seguir.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>Criado para a aula prática de CI/CD • Modifique o HTML, dê um Push e veja a mágica acontecer! <span>♥</span>
+        </p>
+    </footer>
+</body>
+
+</html>
