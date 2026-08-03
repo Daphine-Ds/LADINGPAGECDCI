@@ -1,0 +1,49 @@
+ name: Deploy CI/CD Page to GitHub Pages
+
+# Gatilho: Executa automaticamente a cada push na branch main
+on:
+  push:
+    branches: ["main"]
+
+  # Permite disparar o pipeline manualmente pela aba "Actions" do GitHub se necessário
+  workflow_dispatch:
+
+# Permissões necessárias para publicar no GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Garante que apenas um deploy aconteça por vez
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # --- ETAPA DE BUILD (CI) ---
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Baixar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar o ambiente do GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: 3. Compactar e subir o site como artefato
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Define que os arquivos da raiz (.) serão publicados
+          path: '.'
+
+  # --- ETAPA DE DEPLOY (CD) ---
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build # Este job só executa se o job de 'build' passar com sucesso!
+    steps:
+      - name: 4. Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
